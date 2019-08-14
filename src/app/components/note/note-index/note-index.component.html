@@ -1,0 +1,49 @@
+<h1>Index</h1>
+<a mat-raised-button color="primary" routerLink="/notes/create">Create New</a>
+<hr>
+
+<div>
+    <mat-table #table [dataSource]="dataSource">
+        <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnNames;"></mat-row>
+        
+        <ng-container matColumnDef="details">
+            <mat-header-cell *matHeaderCellDef class="matColumnSize"></mat-header-cell>
+            <mat-cell *matCellDef="let note" routerLink="/notes/detail/{{note.NoteID}}">
+                <i class="material-icons">library_books</i>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="NoteID">
+            <mat-header-cell *matHeaderCellDef> Note # </mat-header-cell>
+            <mat-cell *matCellDef="let note"> {{note.NoteID}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Title">
+            <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+            <mat-cell *matCellDef="let note"> {{note.Title}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="IsStarred">
+            <mat-header-cell *matHeaderCellDef> Favorite </mat-header-cell>
+            <mat-cell *matCellDef="let note">
+                <button mat-icon-button disabled>
+                    <i class="material-icons" (click)="isStarred(note, $event)" disabled>star</i>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="CreateUtc">
+            <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+            <mat-cell *matCellDef="let note"> {{note.CreateUtc | date:'fullDate'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="buttons">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let note"> 
+                <i mat-icon class="material-icons" routerLink="/notes/edit/{{note.NoteID}}">edit</i>
+                <i class="material-icons" routerLink="/notes/delete/{{note.NoteID}}">delete</i>
+            </mat-cell>
+        </ng-container>
+    </mat-table>
+</div>

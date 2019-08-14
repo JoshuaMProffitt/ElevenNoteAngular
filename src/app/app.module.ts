@@ -1,27 +1,52 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatToolbarModule, MatButtonModule, MatCheckboxModule} from '@angular/material';
-import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule, MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatTableModule } from '@angular/material';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthService } from './services/auth.service';
+import { LoginComponent } from './components/login/login.component';
+import { NotesService } from './services/notes.service';
+import { NoteIndexComponent } from './components/note/note-index/note-index.component';
+import { NoteCreateComponent } from './components/note/note-create/note-create.component';
+import { NoteDetailComponent } from './components/note/note-detail/note-detail.component';
+import { NoteEditComponent } from './components/note/note-edit/note-edit.component';
+import { NoteDeleteComponent } from './components/note-delete/note-delete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegistrationComponent,
+    LoginComponent,
+    NoteIndexComponent,
+    NoteCreateComponent,
+    NoteDetailComponent,
+    NoteEditComponent,
+    NoteDeleteComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    [NoopAnimationsModule],
     BrowserAnimationsModule,
-    [MatButtonModule, MatCheckboxModule],
-    MatToolbarModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatTableModule,
   ],
-  exports: [MatButtonModule, MatCheckboxModule],
-  providers: [],
+  providers: [
+    AuthService,
+    NotesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
